@@ -3,8 +3,8 @@
 
 **Môn học:** Các công nghệ lập trình hiện đại  
 **Sinh viên tham gia:**  
-    + *MSSV:* 3121411066  
-    + *Họ tên:* Trần Đồng Gia Hân  
+&emsp;&emsp;+ *MSSV:* 3121411066  
+&emsp;&emsp;+ *Họ tên:* Trần Đồng Gia Hân  
 **GVHD:** TS. Đỗ Như Tài
 
 
