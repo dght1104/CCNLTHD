@@ -7,6 +7,6 @@
 &emsp;&emsp;+ *Họ tên:* Trần Đồng Gia Hân  
 **GVHD:** TS. Đỗ Như Tài
 
-Báo cáo tiến độ: 
-Trang web cá nhân: https://docs.google.com/spreadsheets/d/1mgK1B-d68XdN2qFmvcMu6eg0PJiBjbLPKF2NAi07IR0/edit?gid=1582089175#gid=1582089175
+Báo cáo tiến độ:  
+Trang web cá nhân: [![Google Sheets](https://img.icons8.com/color/48/000000/google-sheets.png)](https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID)
 
