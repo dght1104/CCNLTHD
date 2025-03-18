@@ -8,6 +8,7 @@
 **GVHD:** TS. Đỗ Như Tài
 
 Báo cáo tiến độ:  
-Trang web cá nhân: [![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=google-sheets&logoColor=white)](https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID)
+Trang web cá nhân: [![Google Sheets](https://img.icons8.com/color/48/000000/google-sheets.png)](https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID)
+
 
 
