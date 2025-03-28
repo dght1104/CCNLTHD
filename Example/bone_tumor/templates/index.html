@@ -1,0 +1,44 @@
+from django.shortcuts import render
+from django.core.files.storage import default_storage
+from .models import UploadedImage
+import torch
+from PIL import Image
+import torchvision.transforms as transforms
+
+# Load mô hình AI đã huấn luyện
+MODEL_PATH = "model.pth"  # Đường dẫn mô hình đã lưu
+model = torch.load(MODEL_PATH, map_location=torch.device('cpu'))
+model.eval()
+
+def upload_image(request):
+    """Xử lý tải ảnh lên và chạy nhận diện."""
+    if request.method == "POST" and request.FILES.get("image"):
+        image_file = request.FILES["image"]
+        image_path = default_storage.save("uploads/" + image_file.name, image_file)
+
+        # Tiền xử lý ảnh
+        image = Image.open(image_file).convert("RGB")
+        transform = transforms.Compose([
+            transforms.Resize((224, 224)),  # Đổi kích thước (nếu cần)
+            transforms.ToTensor(),
+        ])
+        image = transform(image).unsqueeze(0)
+
+        # Nhận diện với mô hình
+        with torch.no_grad():
+            output = model(image)
+            prediction = torch.argmax(output, dim=1).item()
+        
+        # Chuyển đổi kết quả
+        labels = ["Benign", "Malignant"]  # Lành tính / Ác tính
+        result = labels[prediction]
+        confidence = torch.softmax(output, dim=1)[0][prediction].item() * 100
+
+        # Lưu vào database
+        uploaded_image = UploadedImage.objects.create(
+            image=image_path, prediction=result, confidence=confidence
+        )
+
+        return render(request, "result.html", {"image": uploaded_image})
+
+    return render(request, "upload.html")
