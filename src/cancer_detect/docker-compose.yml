@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: cancer_detect-web
+    command: python manage.py runserver 0.0.0.0:8001
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=sqlserver://sa:1104@db:1433/Bone_tumor  # Đảm bảo đúng kết nối
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: cancer_detect-db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1104
+    ports:
+      - "1433:1433"
+    networks:
+      - cancer_detect_network
+
+networks:
+  cancer_detect_network:
+    driver: bridge
