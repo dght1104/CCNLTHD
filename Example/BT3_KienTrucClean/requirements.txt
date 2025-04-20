@@ -1,4 +1,0 @@
-django
-opencv-python
-numpy
-tensorflow
