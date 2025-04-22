@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -26,7 +29,10 @@ SECRET_KEY = "django-insecure-^051ajf9e393igu0!y6_i-#zye1)6bv@4@!9j5$_0bb!^o0^=o
 DEBUG = True
 
 ALLOWED_HOSTS = []
+STATIC_URL = '/static/'
 
+# Đảm bảo rằng Django biết đến thư mục static trong ứng dụng cancer_detect
+STATICFILES_DIRS = [BASE_DIR / 'cancer_detect' / 'static']
 
 # Application definition
 
@@ -125,3 +131,4 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+

@@ -1,0 +1,25 @@
+<h1>Drag and Drop Image Uploader</h1>
+{% load static %}
+
+<!--Khu vực tải ảnh-->
+<div id="drag-area">
+    <p>Kéo thả ảnh</p>
+    <!-- <input type="file" id="file-input" accept="image/*"> -->
+    <label for="file-input" >CHọn ảnh</label>
+</div>
+
+<button id="submit-btn">Submit</button>
+
+<!--Khu vực hiện kết quả-->
+<div id="image-preview">
+    <p>Ảnh tải lên</p>
+    <img id="uploaded-img" src="" alt="Ảnh tải lên">
+</div>
+
+<script>
+
+</script>
+
+
+<!-- CSS cho vùng drop và preview ảnh -->
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
