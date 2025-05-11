@@ -1,18 +1,75 @@
-.drop-area {
-    width: 300px;
-    height: 200px;
+body {
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    background-color: #f9f9f9;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+#drag-area {
     border: 2px dashed #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 30px;
     text-align: center;
     cursor: pointer;
+    max-width: 400px;
+    margin: 0 auto 30px auto;
+    background-color: white;
+    border-radius: 10px;
 }
-.drop-area p {
-    margin: 0;
+
+#drag-area.hover {
+    background-color: #f0f0f0;
+}
+
+#drag-area label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#file-input {
+    display: none;
+}
+
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 300px;
+    border: 2px solid #ccc;
+    padding: 5px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
     font-size: 16px;
-    color: #666;
+    cursor: pointer;
 }
-.drop-area:hover {
-    background-color: #f9f9f9;
+
+button:hover {
+    background-color: #45a049;
+}
+
+#loading {
+    text-align: center;
+    font-style: italic;
+    display: none;
+}
+
+#error-message {
+    color: red;
+    text-align: center;
+    display: none;
 }

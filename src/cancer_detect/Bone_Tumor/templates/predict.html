@@ -1,25 +1,85 @@
-<h1>Drag and Drop Image Uploader</h1>
-{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Dự đoán ung thư xương</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Dự đoán ung thư xương</h1>
 
-<!--Khu vực tải ảnh-->
-<div id="drag-area">
-    <p>Kéo thả ảnh</p>
-    <!-- <input type="file" id="file-input" accept="image/*"> -->
-    <label for="file-input" >CHọn ảnh</label>
-</div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div id="drag-area">
+            <p>Kéo thả ảnh vào đây hoặc</p>
+            <label for="file-input">Chọn ảnh</label>
+            <input type="file" id="file-input" name="image" accept="image/*" required>
+            <img id="preview" src="#" alt="Ảnh preview" style="display: none;">
+            <div id="error-message" style="color: red; display: none;">Vui lòng chọn một ảnh!</div>
+        </div>
 
-<button id="submit-btn">Submit</button>
+        <button type="submit">Dự đoán</button>
+    </form>
+    {% if result %}
+        <h3>Kết quả dự đoán: {{ result }}</h3>
+    {% endif %}
 
-<!--Khu vực hiện kết quả-->
-<div id="image-preview">
-    <p>Ảnh tải lên</p>
-    <img id="uploaded-img" src="" alt="Ảnh tải lên">
-</div>
+    {% if predicted_image_url %}
+        <h3>Ảnh khoan vùng:</h3>
+        <img src="{{ predicted_image_url }}" alt="Ảnh dự đoán">
+    {% endif %}
 
-<script>
+    <script>
+        const dragArea = document.getElementById("drag-area");
+        const fileInput = document.getElementById("file-input");
+        const preview = document.getElementById("preview");
+        const form = document.querySelector("form");
+        const loading = document.getElementById("loading");
+        const errorMessage = document.getElementById("error-message");
 
-</script>
+        // Khi người dùng chọn ảnh từ input file
+        fileInput.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block"; // Hiển thị ảnh preview
+                    errorMessage.style.display = "none"; // Ẩn thông báo lỗi
+                    // Không lưu ảnh vào localStorage để không giữ ảnh cũ sau khi reload trang
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
+        // Khi người dùng kéo thả ảnh vào khu vực drag-area
+        dragArea.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dragArea.classList.add("hover");
+        });
 
-<!-- CSS cho vùng drop và preview ảnh -->
-<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        dragArea.addEventListener("dragleave", () => {
+            dragArea.classList.remove("hover");
+        });
+
+        dragArea.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dragArea.classList.remove("hover");
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith("image/")) {
+                fileInput.files = e.dataTransfer.files;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block"; // Hiển thị ảnh preview
+                    errorMessage.style.display = "none"; // Ẩn thông báo lỗi
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
